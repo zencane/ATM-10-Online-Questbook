@@ -1,0 +1,17 @@
+# Extracted textures — not needed, textures.js handles everything
+assets/textures/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Zip files
+*.zip
+
+# Local server logs
+*.log
