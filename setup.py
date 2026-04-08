@@ -181,6 +181,21 @@ def process_item(item_id, idx):
     if ':' not in item_id: return None, None
     modid, name = item_id.split(':', 1)
 
+    # ── Check assets/textures/manual/ first (user-supplied PNGs) ──
+    for tex_type in ('item', 'block'):
+        manual_path = ROOT / 'assets' / 'textures' / 'manual' / modid / tex_type / f'{name}.png'
+        if manual_path.exists():
+            try:
+                img = Image.open(manual_path).convert('RGBA')
+                w, h = img.size
+                # Animate if strip
+                if h > w and h % w == 0:
+                    frames = h // w
+                    return {'src': to_b64_png(img), 'frames': frames, 'frametime': 1}, 'animated'
+                return to_b64_png(img), 'item'
+            except Exception:
+                pass
+
     # item/ first
     item_key = f'{modid}:item:{name}'
     if item_key in idx:
@@ -362,6 +377,9 @@ print(bold('\n─'*44))
 print(bold('TEXTURE EXTRACTION'))
 print(bold('─'*44))
 
+# Ensure manual textures folder exists
+(ROOT / 'assets' / 'textures' / 'manual').mkdir(parents=True, exist_ok=True)
+
 # ── Scan SNBTs for item IDs ───────────────────────────────
 print(bold('\nScanning chapters for item IDs'))
 all_ids = set()
@@ -395,8 +413,9 @@ print(f'  {green("✓")} {len(idx)} textures indexed in {time.time()-t0:.1f}s')
 
 # ── Process only the IDs we need ─────────────────────────
 print(bold(f'\nProcessing {len(all_ids)} item textures'))
-textures = {}
-counts   = {'item':0,'block_iso':0,'block_flat':0,'animated':0,'missing':0}
+textures   = {}
+missing_ids = set()
+counts     = {'item':0,'block_iso':0,'block_flat':0,'animated':0,'missing':0}
 t0       = time.time()
 
 for i, item_id in enumerate(sorted(all_ids)):
@@ -406,6 +425,7 @@ for i, item_id in enumerate(sorted(all_ids)):
         counts[kind] += 1
     else:
         counts['missing'] += 1
+        missing_ids.add(item_id)
     if (i+1) % 25 == 0 or (i+1) == len(all_ids):
         bar = '█' * int((i+1)/len(all_ids)*20)
         print(f'  [{bar:<20}] {i+1}/{len(all_ids)}', end='\r')
@@ -427,7 +447,52 @@ TEXTURES_F.write_text(out_text, encoding='utf-8')
 size_kb = len(out_text.encode()) // 1024
 print(f'  {green("✓")} {len(textures)} entries, {size_kb}KB')
 
+# ── Write missing_textures.md ─────────────────────────────
+print(bold('\nWriting data/missing_textures.md'))
+MANUAL_DIR = ROOT / 'assets' / 'textures' / 'manual'
+MISSING_F  = DATA_DIR / 'missing_textures.md'
+
+# Figure out which chapter(s) each missing ID appears in
+missing_by_chapter = {}
+for snbt_f in local_snbts:
+    text     = snbt_f.read_text(encoding='utf-8', errors='replace')
+    ch_ids   = scan_snbt_ids(text) & missing_ids
+    if ch_ids:
+        missing_by_chapter[snbt_f.stem] = sorted(ch_ids)
+
+# Build the report
+md_lines = [
+    '# Missing Textures',
+    '',
+    'These item IDs had no texture found in your mod jars.',
+    'To fix: drop a PNG at the path shown, then re-run setup.py mode 2.',
+    'PNGs placed in assets/textures/manual/ are picked up automatically.',
+    '',
+    '---',
+    '',
+]
+
+total_missing = 0
+for ch_id, ids in sorted(missing_by_chapter.items()):
+    md_lines.append(f'## {ch_id}')
+    md_lines.append('')
+    for item_id in ids:
+        modid, name = item_id.split(':', 1) if ':' in item_id else ('unknown', item_id)
+        # Suggest item/ path first (most likely), block/ as alternative
+        item_path  = f'assets/textures/manual/{modid}/item/{name}.png'
+        block_path = f'assets/textures/manual/{modid}/block/{name}.png'
+        md_lines.append(f'### {item_id}')
+        md_lines.append(f'  Item sprite → `{item_path}`')
+        md_lines.append(f'  Block faces → `{block_path}` (+ `{name}_top.png`, `{name}_side.png`)')
+        md_lines.append('')
+        total_missing += 1
+    md_lines.append('')
+
+MISSING_F.write_text('\n'.join(md_lines), encoding='utf-8')
+print(f'  {green("✓")} missing_textures.md: {total_missing} items across {len(missing_by_chapter)} chapters')
+print(f'   Drop PNGs into assets/textures/manual/ then re-run mode 2')
+
 print(bold(f'\n✅ Full setup complete!'))
-print(f'   {len(chapters)} chapters  |  {len(textures)} textures ({size_kb}KB)')
+print(f'   {len(chapters)} chapters  |  {len(textures)} textures ({size_kb}KB)  |  {total_missing} missing')
 print(f'\n   Windows: start.bat  |  Mac/Linux: ./start.sh')
 print(f'   Open http://localhost:8000\n')
