@@ -1,4 +1,509 @@
 {
-  "pack_name": "All the Mods 10",
-  "chapters": []
+  "pack_name": "newpack",
+  "chapters": [
+    {
+      "id": "achapter_2r_6the_atm_star",
+      "title": "Achapter 2r 6the Atm Star",
+      "icon": "modularrouters:creative_module",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/achapter_2r_6the_atm_star.snbt"
+    },
+    {
+      "id": "allthemodium",
+      "title": "Allthemodium",
+      "icon": "allthemodium:allthemodium_ingot",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/allthemodium.snbt"
+    },
+    {
+      "id": "apotheosis_2",
+      "title": "Apotheosis",
+      "icon": "minecraft:spawner",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/apotheosis_2.snbt"
+    },
+    {
+      "id": "apotheosis_gear",
+      "title": "Apotheosis Gear",
+      "icon": "minecraft:wooden_sword",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/apotheosis_gear.snbt"
+    },
+    {
+      "id": "apothic_enchanting",
+      "title": "Apothic Enchanting",
+      "icon": "minecraft:enchanting_table",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/apothic_enchanting.snbt"
+    },
+    {
+      "id": "applied_energistics_2",
+      "title": "Applied Energistics",
+      "icon": "ae2:quartz_cluster",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/applied_energistics_2.snbt"
+    },
+    {
+      "id": "ars_nouveau",
+      "title": "Ars Nouveau",
+      "icon": "ars_nouveau:source_gem",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/ars_nouveau.snbt"
+    },
+    {
+      "id": "artifacts",
+      "title": "Artifacts",
+      "icon": null,
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/artifacts.snbt"
+    },
+    {
+      "id": "basic_armor",
+      "title": "Basic Armor",
+      "icon": "minecraft:diamond_chestplate",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/basic_armor.snbt"
+    },
+    {
+      "id": "basic_logistics",
+      "title": "Basic Logistics",
+      "icon": "pipez:wrench",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/basic_logistics.snbt"
+    },
+    {
+      "id": "basic_power",
+      "title": "Basic Power",
+      "icon": "mekanism:creative_energy_cube",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/basic_power.snbt"
+    },
+    {
+      "id": "basic_tools",
+      "title": "Basic Tools",
+      "icon": "minecraft:diamond_pickaxe",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/basic_tools.snbt"
+    },
+    {
+      "id": "bounty_board",
+      "title": "Bounty Board",
+      "icon": "minecraft:zombie_head",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/bounty_board.snbt"
+    },
+    {
+      "id": "building_tips",
+      "title": "Building Tips",
+      "icon": "framedblocks:framed_cube",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/building_tips.snbt"
+    },
+    {
+      "id": "bumblezone",
+      "title": "Bumblezone",
+      "icon": "minecraft:bee_nest",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/bumblezone.snbt"
+    },
+    {
+      "id": "cataclysm",
+      "title": "Cataclysm",
+      "icon": "cataclysm:the_incinerator",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/cataclysm.snbt"
+    },
+    {
+      "id": "chapter_2_the_star",
+      "title": "Chapter 2 The Star",
+      "icon": "allthetweaks:atm_star",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/chapter_2_the_star.snbt"
+    },
+    {
+      "id": "create",
+      "title": "Create",
+      "icon": "create:large_cogwheel",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/create.snbt"
+    },
+    {
+      "id": "deeper_and_darker",
+      "title": "Deeper And Darker",
+      "icon": "deeperdarker:heart_of_the_deep",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/deeper_and_darker.snbt"
+    },
+    {
+      "id": "draconic_evolution",
+      "title": "Draconic Evolution",
+      "icon": "draconicevolution:awakened_core",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/draconic_evolution.snbt"
+    },
+    {
+      "id": "elmystical_agriculturerr",
+      "title": "Elmystical Agriculturerr",
+      "icon": "mysticalagradditions:insanium_essence",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/elmystical_agriculturerr.snbt"
+    },
+    {
+      "id": "eternal_starlight",
+      "title": "Eternal Starlight",
+      "icon": "eternal_starlight:starlight_flower",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/eternal_starlight.snbt"
+    },
+    {
+      "id": "evilcraft",
+      "title": "Evilcraft",
+      "icon": "evilcraft:dark_power_gem",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/evilcraft.snbt"
+    },
+    {
+      "id": "extended__advanced_ae",
+      "title": "Extended  Advanced Ae",
+      "icon": "advanced_ae:shattered_singularity",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/extended__advanced_ae.snbt"
+    },
+    {
+      "id": "extreme_reactors",
+      "title": "Extreme Reactors",
+      "icon": "bigreactors:reinforced_reactorfuelrod",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/extreme_reactors.snbt"
+    },
+    {
+      "id": "food_and_farming",
+      "title": "Food And Farming",
+      "icon": "minecraft:cake",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/food_and_farming.snbt"
+    },
+    {
+      "id": "forbidden__arcanus",
+      "title": "Forbidden  Arcanus",
+      "icon": "forbidden_arcanus:hephaestus_forge_tier_1",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/forbidden__arcanus.snbt"
+    },
+    {
+      "id": "generators",
+      "title": "Generators",
+      "icon": "ironfurnaces:million_furnace",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/generators.snbt"
+    },
+    {
+      "id": "hostile_neural_networks",
+      "title": "Hostile Neural Networks",
+      "icon": "hostilenetworks:sim_chamber",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/hostile_neural_networks.snbt"
+    },
+    {
+      "id": "ice__fire",
+      "title": "Ice  Fire",
+      "icon": "iceandfire:dragon_skull_fire",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/ice__fire.snbt"
+    },
+    {
+      "id": "immersive_engineering",
+      "title": "Immersive Engineering",
+      "icon": "immersiveengineering:hammer",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/immersive_engineering.snbt"
+    },
+    {
+      "id": "industrial_foregoing",
+      "title": "Industrial Foregoing",
+      "icon": "industrialforegoing:dryrubber",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/industrial_foregoing.snbt"
+    },
+    {
+      "id": "integrated_dynamics",
+      "title": "Integrated Dynamics",
+      "icon": "integrateddynamics:crystalized_menril_chunk",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/integrated_dynamics.snbt"
+    },
+    {
+      "id": "iron_spells_and_spellbooks",
+      "title": "Iron Spells And Spellbooks",
+      "icon": "minecraft:book",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/iron_spells_and_spellbooks.snbt"
+    },
+    {
+      "id": "justdirethings",
+      "title": "Justdirethings",
+      "icon": "justdirethings:fuel_canister",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/justdirethings.snbt"
+    },
+    {
+      "id": "mahou_tsukai",
+      "title": "Mahou Tsukai",
+      "icon": "mahoutsukai:mahoujin_projector",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mahou_tsukai.snbt"
+    },
+    {
+      "id": "mainquestline_part_1",
+      "title": "Main Quest Line (Part 1)",
+      "icon": "minecraft:crafting_table",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mainquestline_part_1.snbt"
+    },
+    {
+      "id": "mekanism",
+      "title": "Mekanism",
+      "icon": "mekanism:steel_casing",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mekanism.snbt"
+    },
+    {
+      "id": "mekanism_reactors",
+      "title": "Mekanism",
+      "icon": "mekanism:ultimate_induction_provider",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mekanism_reactors.snbt"
+    },
+    {
+      "id": "mi_digital",
+      "title": "Mi Digital",
+      "icon": "modern_industrialization:blastproof_alloy_ingot",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mi_digital.snbt"
+    },
+    {
+      "id": "mi_electric",
+      "title": "Mi Electric",
+      "icon": "modern_industrialization:stainless_steel_ingot",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mi_electric.snbt"
+    },
+    {
+      "id": "mi_endgame",
+      "title": "Mi Endgame",
+      "icon": "modern_industrialization:quantum_upgrade",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mi_endgame.snbt"
+    },
+    {
+      "id": "mi_steam",
+      "title": "Mi Steam",
+      "icon": "alltheores:bronze_ingot",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/mi_steam.snbt"
+    },
+    {
+      "id": "modular_router",
+      "title": "Modular Router",
+      "icon": "modularrouters:modular_router",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/modular_router.snbt"
+    },
+    {
+      "id": "natures_aura",
+      "title": "Natures Aura",
+      "icon": "naturesaura:gold_leaf",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/natures_aura.snbt"
+    },
+    {
+      "id": "occultism",
+      "title": "Occultism",
+      "icon": "occultism:ritual_dummy/summon_foliot_crusher",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/occultism.snbt"
+    },
+    {
+      "id": "oritech",
+      "title": "Oritech",
+      "icon": "oritech:powered_furnace_block",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/oritech.snbt"
+    },
+    {
+      "id": "pneumaticcraft",
+      "title": "Pneumaticcraft",
+      "icon": "pneumaticcraft:compressed_iron_chestplate",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/pneumaticcraft.snbt"
+    },
+    {
+      "id": "powah",
+      "title": "Powah",
+      "icon": "powah:energizing_orb",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/powah.snbt"
+    },
+    {
+      "id": "productive_bees",
+      "title": "Productive Bees",
+      "icon": "minecraft:honeycomb",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/productive_bees.snbt"
+    },
+    {
+      "id": "productive_trees",
+      "title": "Productive Trees",
+      "icon": "minecraft:oak_sapling",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/productive_trees.snbt"
+    },
+    {
+      "id": "pylons",
+      "title": "Pylons",
+      "icon": "pylons:infusion_pylon",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/pylons.snbt"
+    },
+    {
+      "id": "railcraft",
+      "title": "Railcraft",
+      "icon": "railcraft:steam_locomotive",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/railcraft.snbt"
+    },
+    {
+      "id": "refined_storage",
+      "title": "Refined Storage",
+      "icon": "refinedstorage:creative_controller",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/refined_storage.snbt"
+    },
+    {
+      "id": "relics",
+      "title": "Relics",
+      "icon": "relics:researching_table",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/relics.snbt"
+    },
+    {
+      "id": "silent_gear",
+      "title": "Silent Gear",
+      "icon": "silentgear:pickaxe_blueprint",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/silent_gear.snbt"
+    },
+    {
+      "id": "storage",
+      "title": "Storage",
+      "icon": "minecraft:chest",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/storage.snbt"
+    },
+    {
+      "id": "theurgy",
+      "title": "Theurgy",
+      "icon": "theurgy:alchemical_sulfur_sulfur",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/theurgy.snbt"
+    },
+    {
+      "id": "tips_and_tricks",
+      "title": "Tips And Tricks",
+      "icon": "minecraft:recovery_compass",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/tips_and_tricks.snbt"
+    },
+    {
+      "id": "twilight_forest",
+      "title": "Twilight Forest",
+      "icon": "twilightforest:moonworm_queen",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/twilight_forest.snbt"
+    },
+    {
+      "id": "undergarden",
+      "title": "Undergarden",
+      "icon": "undergarden:catalyst",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/undergarden.snbt"
+    },
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "icon": "ftbquests:book",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/welcome.snbt"
+    },
+    {
+      "id": "xycraft",
+      "title": "Xycraft",
+      "icon": "xycraft_world:xychorium_gem_blue",
+      "icon_emoji": "\ud83d\udcd6",
+      "description": "",
+      "file": "data/quests/xycraft.snbt"
+    }
+  ]
 }
