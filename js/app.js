@@ -206,25 +206,77 @@ function makeSlot(itemId, cls='slot-sm', customSrc=null) {
   return div;
 }
 
-// ── SVG SHAPES ────────────────────────────────────────────
-const CX=32, CY=32, R=28;
-const hexP=(r=R)=>Array.from({length:6},(_,i)=>{const a=(i*60-90)*Math.PI/180;return`${(CX+r*Math.cos(a)).toFixed(1)},${(CY+r*Math.sin(a)).toFixed(1)}`}).join(' ');
-const octP=(r=R)=>Array.from({length:8},(_,i)=>{const a=(i*45-90)*Math.PI/180;return`${(CX+r*Math.cos(a)).toFixed(1)},${(CY+r*Math.sin(a)).toFixed(1)}`}).join(' ');
-function gearD(r1=R,r2=R*.67,teeth=8){const pts=[],ta=Math.PI/teeth,ht=ta*.38;for(let i=0;i<teeth;i++){const a=(i/teeth)*2*Math.PI-Math.PI/2;pts.push([CX+r2*Math.cos(a-ht*1.3),CY+r2*Math.sin(a-ht*1.3)],[CX+r1*Math.cos(a-ht*.55),CY+r1*Math.sin(a-ht*.55)],[CX+r1*Math.cos(a+ht*.55),CY+r1*Math.sin(a+ht*.55)],[CX+r2*Math.cos(a+ht*1.3),CY+r2*Math.sin(a+ht*1.3)]);}return 'M '+pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' L ')+' Z';}
-function shapeEl(shape, status, optional=false) {
-  const sc = status==='complete'?'#55ff55':status==='available'?'#55ff55':'#444444';
-  const da = optional?' stroke-dasharray="4 3"':'';
-  const a  = `fill="#2a2a2a" stroke="${sc}" stroke-width="2" class="qshape"${da}`;
-  switch(shape) {
-    case'hexagon': return `<polygon ${a} points="${hexP()}"/>`;
-    case'octagon': return `<polygon ${a} points="${octP()}"/>`;
-    case'diamond': return `<polygon ${a} points="${CX},${CY-R} ${CX+R},${CY} ${CX},${CY+R} ${CX-R},${CY}"/>`;
-    case'circle':  return `<circle  ${a} cx="${CX}" cy="${CY}" r="${R}"/>`;
-    case'rsquare': return `<rect    ${a} x="${CX-R}" y="${CY-R}" width="${R*2}" height="${R*2}" rx="12"/>`;
-    case'gear':    return `<path    ${a} d="${gearD()}"/>`;
-    case'heart':   return `<path    ${a} d="M${CX},${CY+R*.85} C${CX-1},${CY+R*.85} ${CX-R},${CY+R*.2} ${CX-R},${CY-R*.1} C${CX-R},${CY-R*.7} ${CX-R*.5},${CY-R} ${CX},${CY-R*.4} C${CX+R*.5},${CY-R} ${CX+R},${CY-R*.7} ${CX+R},${CY-R*.1} C${CX+R},${CY+R*.2} ${CX+1},${CY+R*.85} ${CX},${CY+R*.85} Z"/>`;
-    default:       return `<rect    ${a} x="${CX-R}" y="${CY-R}" width="${R*2}" height="${R*2}" rx="4"/>`;
+// ── SVG SHAPES (size-relative) ────────────────────────────
+function shapeEl(shape, status, optional, S) {
+  // S = svgSize. All coords relative to S so shapes scale correctly.
+  const cx = S/2, cy = S/2, r = S/2 - 2;
+  const sc  = status==='complete'?'#55ff55':status==='available'?'#55ff55':'#444';
+  const da  = optional?' stroke-dasharray="4 3"':'';
+  const a   = `fill="#222" stroke="${sc}" stroke-width="2.5" class="qshape"${da}`;
+  const hex = (rr=r)=>Array.from({length:6},(_,i)=>{const ag=(i*60-90)*Math.PI/180;return`${(cx+rr*Math.cos(ag)).toFixed(1)},${(cy+rr*Math.sin(ag)).toFixed(1)}`}).join(' ');
+  const oct = (rr=r)=>Array.from({length:8},(_,i)=>{const ag=(i*45-90)*Math.PI/180;return`${(cx+rr*Math.cos(ag)).toFixed(1)},${(cy+rr*Math.sin(ag)).toFixed(1)}`}).join(' ');
+  function gearPath(r1=r,r2=r*.67,teeth=8){const pts=[],ta=Math.PI/teeth,ht=ta*.38;for(let i=0;i<teeth;i++){const ag=(i/teeth)*2*Math.PI-Math.PI/2;pts.push([cx+r2*Math.cos(ag-ht*1.3),cy+r2*Math.sin(ag-ht*1.3)],[cx+r1*Math.cos(ag-ht*.55),cy+r1*Math.sin(ag-ht*.55)],[cx+r1*Math.cos(ag+ht*.55),cy+r1*Math.sin(ag+ht*.55)],[cx+r2*Math.cos(ag+ht*1.3),cy+r2*Math.sin(ag+ht*1.3)]);}return 'M '+pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' L ')+' Z';}
+  switch(shape){
+    case'hexagon':return`<polygon ${a} points="${hex()}"/>`;
+    case'octagon':return`<polygon ${a} points="${oct()}"/>`;
+    case'diamond':return`<polygon ${a} points="${cx},${cy-r} ${cx+r},${cy} ${cx},${cy+r} ${cx-r},${cy}"/>`;
+    case'circle': return`<circle  ${a} cx="${cx}" cy="${cy}" r="${r}"/>`;
+    case'rsquare':return`<rect    ${a} x="${cx-r}" y="${cy-r}" width="${r*2}" height="${r*2}" rx="${r*.35}"/>`;
+    case'gear':   return`<path    ${a} d="${gearPath()}"/>`;
+    case'heart':  return`<path    ${a} d="M${cx},${cy+r*.85} C${cx-1},${cy+r*.85} ${cx-r},${cy+r*.2} ${cx-r},${cy-r*.1} C${cx-r},${cy-r*.7} ${cx-r*.5},${cy-r} ${cx},${cy-r*.4} C${cx+r*.5},${cy-r} ${cx+r},${cy-r*.7} ${cx+r},${cy-r*.1} C${cx+r},${cy+r*.2} ${cx+1},${cy+r*.85} ${cx},${cy+r*.85} Z"/>`;
+    default:      return`<rect    ${a} x="${cx-r}" y="${cy-r}" width="${r*2}" height="${r*2}" rx="3"/>`;
   }
+}
+
+// ── QUEST ICON WATERFALL ──────────────────────────────────
+// Try every possible source until we find a texture that exists.
+function resolveQuestIcon(q) {
+  // 1. Custom icon path (questpic image)
+  if (q._customIconPath) {
+    const src = resolveImageSrc(q._customIconPath);
+    if (src) return { src, id: null, animated: false };
+  }
+  // 2. Worker-derived _iconId
+  if (q._iconId) {
+    if (isAnimated(q._iconId)) return { src: texEntry(q._iconId).src, id: q._iconId, animated: true, frames: texEntry(q._iconId).frames };
+    const src = texSrc(q._iconId);
+    if (src) return { src, id: q._iconId, animated: false };
+  }
+  // 3. Explicit quest icon field
+  const rawIcon = q.icon?.id;
+  if (rawIcon && rawIcon !== 'ftbquests:custom_icon') {
+    if (isAnimated(rawIcon)) return { src: texEntry(rawIcon).src, id: rawIcon, animated: true, frames: texEntry(rawIcon).frames };
+    const src = texSrc(rawIcon);
+    if (src) return { src, id: rawIcon, animated: false };
+  }
+  // 4. First task item
+  const firstTask = (q.tasks||[])[0];
+  if (firstTask) {
+    let tid = null;
+    if (firstTask.type==='item') {
+      const iid = firstTask.item?.id||'';
+      if (iid==='ftbfiltersystem:smart_filter') {
+        const fs = firstTask.item?.components?.['ftbfiltersystem:filter']||'';
+        const m  = fs.match(/item\(([^)]+)\)/); if (m) tid=m[1];
+      } else tid = iid;
+    } else if (firstTask.type==='kill')  tid = firstTask.entity||'';
+    else if (firstTask.type==='biome')   tid = firstTask.biome||'';
+    if (tid) {
+      if (isAnimated(tid)) return { src: texEntry(tid).src, id: tid, animated: true, frames: texEntry(tid).frames };
+      const src = texSrc(tid);
+      if (src) return { src, id: tid, animated: false };
+    }
+  }
+  // 5. First reward item
+  const firstReward = (q.rewards||[]).find(r=>r.type==='item');
+  if (firstReward) {
+    const rid = firstReward.item?.id||'';
+    const src = texSrc(rid);
+    if (src) return { src, id: rid, animated: false };
+  }
+  // 6. Emoji fallback
+  const fallbackId = q._iconId || rawIcon || null;
+  return { src: null, id: fallbackId, animated: false };
 }
 
 // ── QUEST META (fallback if worker didn't annotate) ───────
@@ -507,50 +559,78 @@ async function renderQuests(chDef) {
 
 function buildQuestNode(q,px,py,canvas) {
   if (q.invisible) return;
-  const status=questStatus(q);
-  const size=q.size||1.0;
-  const svgSize=Math.round(64*size);
-  const icoSize=Math.round(44*size);
+  const status  = questStatus(q);
+  const size    = q.size||1.0;
+  const S       = Math.round(64*size);   // total node size
+  const ICO     = Math.round(S*0.88);    // icon fills 88% — nearly edge to edge
+  const off     = Math.round((S-ICO)/2);
 
-  // Ensure metadata
+  // Resolve icon via waterfall
   if (q._iconId===undefined&&q._customIconPath===undefined) {
     const m=questMeta(q); q._iconId=m.iconId; q._customIconPath=m.customIconPath; q._title=m.title;
   }
+  const icon = resolveQuestIcon(q);
 
-  const customSrc=q._customIconPath?resolveImageSrc(q._customIconPath):null;
+  // ── Wrapper div — this is what we position on the canvas ──
+  // Using position+margin instead of transform so badge anchors cleanly
+  const node = document.createElement('div');
+  node.className=`qnode ${status}${q.optional?' optional':''}${selQuest?.id===q.id?' sel':''}`;
+  node.style.cssText=`left:${px(q.x||0)}px;top:${py(q.y||0)}px;width:${S}px;height:${S}px;margin-left:${-S/2}px;margin-top:${-S/2}px;`;
+  node.dataset.id=q.id;
 
-  // Build icon SVG content
-  let iconContent;
-  if (customSrc) {
-    const off=Math.round((svgSize-icoSize)/2);
-    iconContent=`<image href="${customSrc}" x="${off}" y="${off}" width="${icoSize}" height="${icoSize}" style="image-rendering:pixelated"/>`;
-  } else if (isAnimated(q._iconId)) {
-    // Animated — use foreignObject to embed the CSS animation
-    const t=texEntry(q._iconId);
-    const off=Math.round((svgSize-icoSize)/2);
-    iconContent=`<foreignObject x="${off}" y="${off}" width="${icoSize}" height="${icoSize}"><div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;overflow:hidden"><img src="${t.src}" class="iimg-anim anim-${t.frames}" style="width:100%;height:auto;image-rendering:pixelated"/></div></foreignObject>`;
+  // ── SVG: shape border only ────────────────────────────────
+  const svgEl=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svgEl.setAttribute('width',S); svgEl.setAttribute('height',S);
+  svgEl.setAttribute('viewBox',`0 0 ${S} ${S}`);
+  svgEl.style.cssText='position:absolute;top:0;left:0;pointer-events:none;overflow:visible;';
+  svgEl.innerHTML=shapeEl(q.shape||'',status,q.optional||false,S);
+  node.appendChild(svgEl);
+
+  // ── Icon ─────────────────────────────────────────────────
+  if (icon.src && !icon.animated) {
+    const img=document.createElement('img');
+    img.src=icon.src; img.draggable=false;
+    img.style.cssText=`position:absolute;left:${off}px;top:${off}px;width:${ICO}px;height:${ICO}px;object-fit:contain;image-rendering:pixelated;`;
+    node.appendChild(img);
+  } else if (icon.animated) {
+    // Animated strip — plain div with overflow:hidden, CSS steps() scrolls it
+    const t=texEntry(icon.id);
+    const wrap=document.createElement('div');
+    wrap.style.cssText=`position:absolute;left:${off}px;top:${off}px;width:${ICO}px;height:${ICO}px;overflow:hidden;`;
+    const img=document.createElement('img');
+    img.src=t.src; img.draggable=false;
+    img.className=`iimg-anim anim-${t.frames}`;
+    img.style.cssText=`width:100%;height:auto;image-rendering:pixelated;display:block;`;
+    wrap.appendChild(img); node.appendChild(wrap);
   } else {
-    const src=q._iconId?texSrc(q._iconId):null;
-    if (src) {
-      const off=Math.round((svgSize-icoSize)/2);
-      iconContent=`<image href="${src}" x="${off}" y="${off}" width="${icoSize}" height="${icoSize}" style="image-rendering:pixelated"/>`;
-    } else {
-      iconContent=`<text x="${svgSize/2}" y="${svgSize/2+1}" text-anchor="middle" dominant-baseline="central" font-size="${Math.round(22*size)}" style="user-select:none">${itemEmoji(q._iconId||'')}</text>`;
-    }
+    // Emoji fallback — centered text
+    const span=document.createElement('span');
+    span.style.cssText=`position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:${Math.round(22*size)}px;user-select:none;`;
+    span.textContent=itemEmoji(icon.id||'');
+    node.appendChild(span);
   }
 
-  const badgeMap={complete:['badge-complete','✓'],available:['badge-available','!'],locked:['badge-locked','🔒']};
-  const [bCls,bTxt]=badgeMap[status];
-  const badge=`<div class="qbadge ${bCls}">${bTxt}</div>`;
+  // ── Locked overlay — dark tint + centered lock ────────────
+  if (status==='locked') {
+    const overlay=document.createElement('div');
+    overlay.style.cssText=`position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55);font-size:${Math.round(16*size)}px;pointer-events:none;`;
+    overlay.textContent='🔒';
+    node.appendChild(overlay);
+  }
 
-  const node=document.createElement('div');
-  node.className=`qnode ${status}${q.optional?' optional':''}${selQuest?.id===q.id?' sel':''}`;
-  node.style.left=px(q.x||0)+'px'; node.style.top=py(q.y||0)+'px'; node.dataset.id=q.id;
-  node.innerHTML=`<svg width="${svgSize}" height="${svgSize}" viewBox="0 0 ${svgSize} ${svgSize}">${shapeEl(q.shape||'',status,q.optional||false)}${iconContent}</svg>${badge}`;
+  // ── Badge (top-right corner, anchored to node) ────────────
+  if (status==='available') {
+    const b=document.createElement('div'); b.className='qbadge badge-available';
+    b.textContent='!'; node.appendChild(b);
+  } else if (status==='complete') {
+    const b=document.createElement('div'); b.className='qbadge badge-complete';
+    b.textContent='✓'; node.appendChild(b);
+  }
+  // (no badge for locked — overlay handles it)
 
-  node.addEventListener('mouseenter', e=>{ showQuestTooltip(e,q); highlightChain(q.id); });
-  node.addEventListener('mouseleave', ()=>{ hideQuestTooltip(); clearChain(); });
-  node.addEventListener('click', ()=>{ if(!didPan) selectQuest(q); });
+  node.addEventListener('mouseenter',e=>{ showQuestTooltip(e,q); highlightChain(q.id); });
+  node.addEventListener('mouseleave',()=>{ hideQuestTooltip(); clearChain(); });
+  node.addEventListener('click',()=>{ if(!didPan) selectQuest(q); });
   canvas.appendChild(node);
 }
 
@@ -565,10 +645,20 @@ function renderDetail(q) {
   document.getElementById('dp-overlay').classList.add('open');
   const done=questStatus(q)==='complete';
 
-  // Header icon
+  // Header icon — use waterfall so it always shows something
   const icoWrap=document.getElementById('dp-icon-wrap'); icoWrap.innerHTML='';
-  const customSrc=q._customIconPath?resolveImageSrc(q._customIconPath):null;
-  icoWrap.appendChild(makeSlot(q._iconId||'','',customSrc));
+  const icon=resolveQuestIcon(q);
+  if (icon.animated) {
+    const t=texEntry(icon.id);
+    const wrap=document.createElement('div'); wrap.style.cssText='width:100%;height:100%;overflow:hidden;';
+    const img=document.createElement('img'); img.src=t.src; img.className=`iimg-anim anim-${t.frames}`; img.style.cssText='width:100%;height:auto;image-rendering:pixelated;';
+    wrap.appendChild(img); icoWrap.appendChild(wrap);
+  } else if (icon.src) {
+    const img=document.createElement('img'); img.src=icon.src; img.className='iimg'; img.alt='';
+    icoWrap.appendChild(img);
+  } else {
+    icoWrap.textContent=itemEmoji(icon.id||'');
+  }
   document.getElementById('dp-title').textContent=q._title||'';
   document.getElementById('dp-subtitle').textContent=q.subtitle||q.description||'';
 

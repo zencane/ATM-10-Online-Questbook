@@ -201,31 +201,34 @@ body::after {
 ══════════════════════ */
 .qnode {
   position: absolute;
-  display: flex; flex-direction: column; align-items: center;
-  cursor: pointer; z-index: 1;
-  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 1;
+  /* Centering via margin-left/top set inline (avoids transform stacking context issues) */
 }
-.qnode svg { display: block; overflow: visible; }
-.qshape { fill: #2a2a2a; stroke-width: 2; transition: filter .12s; }
-.qnode:hover .qshape, .qnode.sel .qshape { filter: brightness(1.4); }
-.qnode.locked .qshape { opacity: .55; }
+/* Shape border SVG sits behind icon and overlays */
+.qshape { stroke-width: 2.5; transition: filter .12s; }
+.qnode:hover   > svg .qshape { filter: brightness(1.5); }
+.qnode.sel     > svg .qshape { filter: brightness(1.6); }
+.qnode.locked  > svg .qshape { opacity: .7; }
 .qnode.complete  .qshape { stroke: #55ff55; }
-.qnode.available .qshape { stroke: #55ff55; filter: drop-shadow(0 0 4px rgba(85,255,85,.5)); }
+.qnode.available .qshape { stroke: #55ff55; filter: drop-shadow(0 0 5px rgba(85,255,85,.6)); }
 .qnode.locked    .qshape { stroke: #444; }
-.qnode.chain-ancestor .qshape { filter: brightness(1.3); }
+.qnode.chain-ancestor > svg .qshape { filter: brightness(1.35); }
 .qlbl { display: none; }
 
-/* ── Badges ── */
+/* ── Badges — anchored to top-right of node ── */
 .qbadge {
-  position: absolute; top: -3px; right: -3px;
-  width: 13px; height: 13px; border-radius: 2px;
+  position: absolute;
+  top: -2px; right: -2px;
+  width: 12px; height: 12px;
+  border-radius: 2px;
   font-family: var(--font-pixel); font-size: 7px;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid rgba(0,0,0,.6); z-index: 2; pointer-events: none; line-height: 1;
+  border: 1px solid rgba(0,0,0,.7);
+  z-index: 3; pointer-events: none; line-height: 1;
 }
-.badge-available { background: #cc0000; color: #fff; }
-.badge-complete  { background: #22aa22; color: #fff; font-size: 8px; }
-.badge-locked    { background: #333;    color: #666; font-size: 9px; }
+.badge-available { background: #cc0000; color: #fff; font-size: 8px; font-weight: bold; }
+.badge-complete  { background: #22aa22; color: #fff; font-size: 7px; }
 
 /* ══════════════════════
    DEP LINES
