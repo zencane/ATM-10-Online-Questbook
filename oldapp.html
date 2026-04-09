@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTB Questbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="titlebar">
+  <span class="logo">⚗ FTB Questbook</span>
+  <span id="pack-name" class="subt"></span>
+</div>
+
+<div id="main">
+  <div id="sidebar">
+    <div id="sidebar-title">CHAPTERS</div>
+    <div id="chaplist"></div>
+  </div>
+
+  <div id="qa">
+    <div id="qhdr">
+      <span id="qhtitle">Select a chapter</span>
+      <span id="qhdesc"></span>
+    </div>
+    <div id="qwrap">
+      <!-- bg-layer is separate from qcanvas so highlights don't repaint it -->
+      <div id="bg-layer"></div>
+      <div id="qcanvas">
+        <svg id="depsvg"></svg>
+      </div>
+    </div>
+    <div id="zoom-controls">
+      <button id="zoom-reset" title="Reset view">&#x2302;</button>
+      <span id="zoom-label">100%</span>
+    </div>
+  </div>
+</div>
+
+<!-- Quest hover tooltip -->
+<div id="quest-tooltip">
+  <div id="qt-title"></div>
+  <div id="qt-desc"></div>
+</div>
+
+<!-- Floating detail panel -->
+<div id="dp-overlay">
+  <div id="dp">
+    <div id="dp-header">
+      <div id="dp-icon-wrap"></div>
+      <div id="dp-title-block">
+        <div id="dp-title"></div>
+        <div id="dp-subtitle"></div>
+      </div>
+      <button id="dp-close" onclick="closeDetail()">&#x2715;</button>
+    </div>
+    <div id="dp-tabs">
+      <button class="dp-tab active" data-tab="main"   onclick="switchTab('main',this)">Quest Info</button>
+      <button class="dp-tab"        data-tab="rewards" onclick="switchTab('rewards',this)">Rewards</button>
+      </div>
+    <div id="dp-content">
+      <div id="tab-main"    class="tab-pane active"></div>
+      <div id="tab-rewards" class="tab-pane"></div>
+    </div>
+    <div id="dp-footer">
+      <button id="dpcomplete">[ MARK COMPLETE ]</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loading screen -->
+<div id="loading">
+  <div id="loading-box">
+    <div id="loading-title">&#x2697; FTB Questbook</div>
+    <div id="loading-msg">Loading...</div>
+    <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
+  </div>
+</div>
+
+<!-- textures.js MUST load before app.js -->
+<script src="data/textures.js" onerror="window.TEXTURES={}"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
